@@ -1,0 +1,59 @@
+create database stock_db;
+drop database stock_db;
+create database stock;
+use stock;
+
+create table sector(sector_id int(11) PRIMARY KEY , sector_name varchar(45) DEFAULT NULL , brief varchar(200) DEFAULT NULL);
+
+create table user( user_id int(11) PRIMARY KEY , user_name varchar(45) , pass_word varchar(45) , user_type varchar(45) , email varchar(45) , mobile_number varchar(45) , confirmed boolean );
+
+alter table sector MODIFY  COLUMN sector_id int(11) AUTO_INCREMENT ;
+
+create table stockexchange( stockexchange_id int (11) auto_increment PRIMARY KEY , stockexchange_name varchar(45) , brief varchar(45) , contact_address varchar(45) , remarks varchar(45));
+
+create table company( company_code int(11) PRIMARY KEY auto_increment , comapny_name varchar(45) , turnover decimal(10,0) , ceo varchar(45) , sector_id int(11) , briefwriteup varchar(200) , stock_code int(11) ,  FOREIGN KEY (sector_id) REFERENCES sector(sector_id));
+
+create table ipo_planned( ipo_id int(11) PRIMARY KEY auto_increment , company_code int(11) , stockexchange_id int(11) , price_per_share decimal(10,0) , total_no_of_shares int(11) ,open_date_time date ,remarks varchar(200) ,  FOREIGN KEY (company_code) REFERENCES company(company_code) ,  FOREIGN KEY (stockexchange_id) REFERENCES stockexchange(stockexchange_id)); 
+
+create table stockpricedetail (stock_code int(11) PRIMARY KEY , company_code int(11) , current_price decimal(10,0) , dated date , c_time time , FOREIGN KEY (company_code) REFERENCES company(company_code));
+
+ALTER TABLE company ADD FOREIGN KEY (stock_code) REFERENCES stockpricedetail(stock_code);
+
+alter table user MODIFY  COLUMN user_id int(11) AUTO_INCREMENT ;
+
+use stock;
+select *from company;
+
+use stock;
+
+select *from company;
+
+delete from company where compnay_name=null;
+
+select *from company;
+
+delete from company where comapny_name=null;
+
+delete from company where company_code="20";
+
+select * from company;
+
+delete from company where company_code="21";
+
+delete from company where company_code="23";
+
+
+
+ALTER TABLE company  ADD  board_of_directors varchar(255);
+
+
+desc company;
+
+
+ALTER TABLE company  ADD  ipo_date varchar(255);
+
+
+
+
+
+
